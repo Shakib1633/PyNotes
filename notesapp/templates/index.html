@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <ol class="list-group">
+        {% for note in notes %}
+            <li class="list-group-item" style="background: #FFFFCC; ">
+                <div class="noteContainer">
+                    <div id="headingAndIconsContainer">
+                        <div class="">
+                            <a href=" {% url 'note' note.id %} ">
+                                <h4 style="color:#8FBC8F">{{note.heading}}</h4>
+                            </a>
+                        </div>
+
+                        <div id="icons">
+                            <a href=" {% url 'note' note.id %}">
+                                <span class="span">
+                                    <button class="btn btn-success icons">
+                                        <i class="fas fa-pen"></i>
+                                    </button>
+                                </span>
+                            </a>
+
+                            <a href="{% url 'delete' note.id %}">
+                                <span class="span">
+                                    <button class="btn btn-danger icons">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div id="notes">
+                        <p>{{note.text | truncatechars:"100"}}</p>
+                    </div>
+
+                    <p style="float: right; font-size: 12px"><strong>{{note.time}}</strong></p>
+                </div>
+            </li>
+        {% endfor %}
+    </ol>
+{% endblock %}
